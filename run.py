@@ -14,8 +14,37 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 
-capacity = SHEET.worksheet('capacity')
+def command_required():
+    """
+    Get a task number input from the user.
+    Runs a while loop to ensure input entered is valid ie a number between 1-3
+    """
+    while True:
+        print("Welcome to Tone Deaf Newcastle\n")
+        print("[1]Sell Existing Event\n[2]Create Event\n[3]Generate Sales Report\n")
+        command_input = input("Enter your task number from the list above: ")
 
-data = capacity.get_all_values()
+        if validate_data(command_input):
+            print("Correct")
+            break
 
-print(data)
+    return command_input
+    validate_data(command_input)
+
+
+def validate_data(value):
+    """
+    Validates the input from the user
+    """
+    try:
+        if value not in ['1', '2', '3']:
+            raise ValueError(
+                f"Please enter a task number between 1-3. You entered {value}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}")
+        return False
+
+    return True
+
+command_required()
