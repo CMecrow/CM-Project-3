@@ -42,7 +42,7 @@ def validate_data(value):
                 f"Please enter a task number between 1-3. You entered {value}"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}")
+        print(f"\nInvalid data: {e}\n")
         return False
 
     return True
