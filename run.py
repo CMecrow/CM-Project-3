@@ -24,13 +24,20 @@ def command_required():
         print("[1]Sell Existing Event\n[2]Create Event\n[3]Generate Sales Report\n")
         command_input = input("Enter your task number from the list above: ")
 
-        if validate_data(command_input):
-            print("Correct")
+        if command_input == '1':
+            print("Sell")
             break
+        elif command_input == '2':
+            print("Create")
+            break
+        elif command_input == '3':
+            print("Report")
+            break
+        else:
+            validate_data(command_input)            
 
     return command_input
-    validate_data(command_input)
-
+    
 
 def validate_data(value):
     """
@@ -42,7 +49,7 @@ def validate_data(value):
                 f"Please enter a task number between 1-3. You entered {value}"
             )
     except ValueError as e:
-        print(f"\nInvalid data: {e}\n")
+        print(f"\nInvalid selection: {e}\n")
         return False
 
     return True
