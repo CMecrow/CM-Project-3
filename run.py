@@ -14,6 +14,27 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 
+def sell_event():
+    """
+    User is displayed a list of on sale events, selects and event
+    then inputs how many tickets they'd like to sell
+    """
+    events = SHEET.worksheet('sales').row_values(1)
+    sales = SHEET.worksheet('sales')
+    print(f"\nSell Existing Event:\n\n{events}\n")
+    event_input = input("Enter event name from list above: ")
+
+    if event_input in events:
+        result = sales.find(event_input)
+        print(result)
+                       
+    elif event_input not in events:
+        raise ValueError(
+            f"Please enter a valid event name from the list above, you entered {event_input}"
+        )
+    
+
+        
 def command_required():
     """
     Get a task number input from the user.
@@ -25,7 +46,7 @@ def command_required():
         command_input = input("Enter your task number from the list above: ")
 
         if command_input == '1':
-            print("Sell")
+            sell_event()
             break
         elif command_input == '2':
             print("Create")
