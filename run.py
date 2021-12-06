@@ -16,23 +16,32 @@ SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 
 def sell_event():
     """
-    User is displayed a list of on sale events, selects and event
+    User is displayed a list of on sale events, selects an event
     then inputs how many tickets they'd like to sell
     """
-    events = SHEET.worksheet('sales').row_values(1)
-    sales = SHEET.worksheet('sales')
-    print(f"\nSell Existing Event:\n\n{events}\n")
-    event_input = input("Enter event name from list above: ")
+    while True:
+        events = SHEET.worksheet('sales').row_values(1)
+        sales = SHEET.worksheet('sales')
+        data = sales.get_all_values()
+        print(f"\nSell Existing Event:\n\n{events}\n")
+        event_input = input("Enter event name from list above: ")
 
-    if event_input in events:
-        result = sales.find(event_input)
-        print(result)
-                       
-    elif event_input not in events:
-        raise ValueError(
-            f"Please enter a valid event name from the list above, you entered {event_input}"
-        )
-    
+        try:
+            if event_input in events:
+                #entered_event = sales.find(event_input)
+                #print(entered_event)   
+                print(f"\nSelected Event: {event_input}\n")
+                num_tickets = input("How many tickets would you like to purchase? ")
+                validate_tickets(num_tickets)         
+                            
+            elif event_input not in events:
+                raise ValueError(
+                    f"Please enter a valid event name from the list above, you entered {event_input}"
+                )
+        except ValueError as e:
+            print(f"\nInvalid selection: {e}\n")
+            command_required()
+      
 
         
 def command_required():
@@ -55,24 +64,35 @@ def command_required():
             print("Report")
             break
         else:
-            validate_data(command_input)            
+            validate_task(command_input)            
 
     return command_input
     
 
-def validate_data(value):
+def validate_task(value):
     """
     Validates the input from the user
     """
     try:
-        if value not in ['1', '2', '3']:
-            raise ValueError(
-                f"Please enter a task number between 1-3. You entered {value}"
-            )
+        raise ValueError(
+            f"Please enter a task number between 1-3. You entered {value}"
+        )
     except ValueError as e:
         print(f"\nInvalid selection: {e}\n")
         return False
 
     return True
+
+def validate_tickets(values):
+    """
+    """
+    try:
+        if int(values) >= 9:
+            raise ValueError(
+                f"This event has a ticket limit of 8"
+            )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n")    
+    
 
 command_required()
