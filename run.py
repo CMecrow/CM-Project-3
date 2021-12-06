@@ -18,7 +18,7 @@ def sell_event():
     """
     User is displayed a list of on sale events, selects an event
     then inputs how many tickets they'd like to sell
-    """
+    """  
     while True:
         events = SHEET.worksheet('sales').row_values(1)
         sales = SHEET.worksheet('sales')
@@ -32,7 +32,9 @@ def sell_event():
                 #print(entered_event)   
                 print(f"\nSelected Event: {event_input}\n")
                 num_tickets = input("How many tickets would you like to purchase? ")
-                validate_tickets(num_tickets)         
+                if validate_tickets(num_tickets):
+                    print("Correct!")
+                    break       
                             
             elif event_input not in events:
                 raise ValueError(
@@ -42,8 +44,7 @@ def sell_event():
             print(f"\nInvalid selection: {e}\n")
             command_required()
       
-
-        
+    
 def command_required():
     """
     Get a task number input from the user.
@@ -92,7 +93,10 @@ def validate_tickets(values):
                 f"This event has a ticket limit of 8"
             )
     except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again\n")    
+        print(f"\nInvalid entry: {e}, please try again\n")   
+        return False
+
+    return True 
     
 
 command_required()
