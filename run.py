@@ -28,21 +28,22 @@ def sell_event():
 
         try:
             if event_input in events:
-                #entered_event = sales.find(event_input)
-                #print(entered_event)   
+                entered_event = sales.find(event_input)
+                event_column = entered_event.col
+                #print(event_column)   
                 print(f"\nSelected Event: {event_input}\n")
                 num_tickets = input("How many tickets would you like to purchase? ")
                 if validate_tickets(num_tickets):
+                    sales.update_cell(2, event_column, num_tickets)
                     print("Correct!")
-                    break       
-                            
-            elif event_input not in events:
+                    break 
+
+            if event_input not in events:
                 raise ValueError(
                     f"Please enter a valid event name from the list above, you entered {event_input}"
                 )
         except ValueError as e:
-            print(f"\nInvalid selection: {e}\n")
-            command_required()
+            print(f"\nInvalid selection: {e}\n")            
       
     
 def command_required():
@@ -93,7 +94,7 @@ def validate_tickets(values):
                 f"This event has a ticket limit of 8"
             )
     except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again\n")   
+        print(f"\nInvalid entry: {e}, please try again")   
         return False
 
     return True 
