@@ -30,12 +30,12 @@ def sell_event():
             if event_input in events:
                 entered_event = sales.find(event_input)
                 event_column = entered_event.col
-                #print(event_column)   
+                previous_sales = int(sales.cell(2, event_column).value)
                 print(f"\nSelected Event: {event_input}\n")
-                num_tickets = input("How many tickets would you like to purchase? ")
+                num_tickets = int(input("How many tickets would you like to purchase? "))
                 if validate_tickets(num_tickets):
-                    sales.update_cell(2, event_column, num_tickets)
-                    print("Correct!")
+                    sales.update_cell(2, event_column, num_tickets + previous_sales)
+                    
                     break 
 
             if event_input not in events:
