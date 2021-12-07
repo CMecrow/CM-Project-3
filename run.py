@@ -22,7 +22,8 @@ def sell_event():
     while True:
         events = SHEET.worksheet('sales').row_values(1)
         sales = SHEET.worksheet('sales')
-        data = sales.get_all_values()
+        availability = SHEET.worksheet('availability')
+        capacity = SHEET.worksheet('capacity')
         print(f"\nSell Existing Event:\n\n{events}\n")
         event_input = input("Enter event name from list above: ")
 
@@ -35,9 +36,12 @@ def sell_event():
                 num_tickets = int(input("How many tickets would you like to purchase? "))
                 if validate_tickets(num_tickets):
                     sales.update_cell(2, event_column, num_tickets + previous_sales)
+                    capacity_num = int(capacity.cell(2, event_column).value)
+                    availability.update_cell(2, event_column, capacity_num - (previous_sales + num_tickets))
+                    amended_avail = int(availability.cell(2, event_column).value)
+                    print(f"\n{num_tickets} successfuly sold for {event_input}. {amended_avail} left on sale.\n")
+                    break    
                     
-                    break 
-
             if event_input not in events:
                 raise ValueError(
                     f"Please enter a valid event name from the list above, you entered {event_input}"
@@ -97,7 +101,6 @@ def validate_tickets(values):
         print(f"\nInvalid entry: {e}, please try again")   
         return False
 
-    return True 
-    
+    return True    
 
 command_required()
