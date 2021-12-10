@@ -60,7 +60,8 @@ def sell_event():
                     f"Please enter a valid event name from the list above, you entered {event_input}"
                 )
         except ValueError as e:
-            print(f"\nInvalid selection: {e}\n")
+            print(f"\nInvalid selection: {e}")
+            break
 
 
 def create_event():
@@ -125,22 +126,20 @@ def command_required():
     """
     while True:
         print("Welcome to Tone Deaf Newcastle\n")
-        print("[1] Sell Existing Event\n[2] Create Event\n[3] Generate Sales Report\n")
+        print("[1] Sell Existing Event\n[2] Create Event\n[3] Generate Sales Report\n[4] Exit Program\n")
         command_input = input("Enter your task number from the list above: ")
 
         if command_input == '1':
             sell_event()
-            break
         elif command_input == '2':
-            create_event()
-            break
+            create_event()     
         elif command_input == '3':
-            sales_report()
-            break
+            sales_report() 
+        elif command_input == '4':
+            print("\nGoodbye from Tone Deaf Newcastle!")
+            break   
         else:
-            invalid_task(command_input)            
-
-    return command_input
+            invalid_task(command_input)           
     
 
 def invalid_task(value):
@@ -149,7 +148,7 @@ def invalid_task(value):
     """
     try:
         raise ValueError(
-            f"Please enter a task number between 1-3. You entered {value}"
+            f"Please enter a task number between 1-4. You entered {value}"
         )
     except ValueError as e:
         print(f"\nInvalid selection: {e}\n")
