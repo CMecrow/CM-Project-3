@@ -35,32 +35,33 @@ def sell_event():
                 entered_event = sales.find(event_input)
                 event_column = entered_event.col
                 previous_sales = int(sales.cell(2, event_column).value)
-                previous_avail = int(availability.cell(2, event_column).value)
                 capacity_num = int(capacity.cell(2, event_column).value)
                 print(f"\nSelected Event: {event_input}\n")
                 num_tickets = int(input("How many tickets would you like to purchase? "))
-                validate_avail = int(availability.cell(2, event_column).value) - num_tickets
+                num_avail = int(availability.cell(2, event_column).value)
                 try:
-                    if validate_tickets(num_tickets) and validate_avail >= 0:
-                        sales.update_cell(2, event_column, num_tickets + previous_sales)
-                        availability.update_cell(2, event_column, capacity_num - (previous_sales + num_tickets))
-                        amended_avail = int(availability.cell(2, event_column).value)
-                        print(f"\n{num_tickets} successfuly sold for {event_input}. {amended_avail} left on sale.\n")
-                        break
-                    if validate_tickets(num_tickets) and validate_avail < 0: 
-                        raise ValueError(
-                            f"Not enough tickets available. Only {previous_avail} remaining"
-                        )
+                    if validate_tickets(num_tickets):
+                        if num_avail >= num_tickets:
+                            sales.update_cell(2, event_column, num_tickets + previous_sales)
+                            availability.update_cell(2, event_column, capacity_num - (previous_sales + num_tickets))
+                            amended_avail = int(availability.cell(2, event_column).value)
+                            print(f"\n{num_tickets} successfuly sold for {event_input}. {amended_avail} left on sale.\n")
+                            break
+                        else:
+                            raise ValueError(
+                                f"Not enough tickets available. Only {num_avail} remaining"
+                            )
                 except ValueError as e:
                     print(f"\nInvalid input: {e}\n")
                     break 
-                    
+
             if event_input not in events:
                 raise ValueError(
                     f"Please enter a valid event name from the list above, you entered {event_input}"
                 )
         except ValueError as e:
             print(f"\nInvalid selection: {e}\n")
+
 
 def create_event():
     """
@@ -90,9 +91,12 @@ def create_event():
     }
     print("\nEvent created:\n")
     for key, value in ne_details.items():
-        print(key, ':', value)
+        print(key + ':', value)
 
 def sales_report():
+    """
+    """
+    print("\nGenerating Sales Report...\n")
     keys = ['Capacity', 'Sales', 'Availability']
     events = SHEET.worksheet('sales').row_values(1)
     capacity_fig = SHEET.worksheet('capacity').row_values(2)
@@ -112,7 +116,7 @@ def sales_report():
         print(event_name + ':')
         for key, value in event.items():
             print('\t', key + ':', value)
-          
+        print("")  
     
 def command_required():
     """
@@ -121,7 +125,7 @@ def command_required():
     """
     while True:
         print("Welcome to Tone Deaf Newcastle\n")
-        print("[1]Sell Existing Event\n[2]Create Event\n[3]Generate Sales Report\n")
+        print("[1] Sell Existing Event\n[2] Create Event\n[3] Generate Sales Report\n")
         command_input = input("Enter your task number from the list above: ")
 
         if command_input == '1':
@@ -134,14 +138,14 @@ def command_required():
             sales_report()
             break
         else:
-            validate_task(command_input)            
+            invalid_task(command_input)            
 
     return command_input
     
 
-def validate_task(value):
+def invalid_task(value):
     """
-    Validates the input from the user
+    Reports an invalid input from the user
     """
     try:
         raise ValueError(
