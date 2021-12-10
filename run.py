@@ -78,9 +78,11 @@ def create_event():
     sales.update_cell(1, row_update, new_event_name)
     capacity.update_cell(1, row_update, new_event_name)
     availability.update_cell(1, row_update, new_event_name)
-    new_event_capacity = int(input(f"\nSet capacity for {new_event_name}: "))
-
-      
+    ne_capacity_input = int(input(f"\nSet capacity for {new_event_name}: "))
+    ne_sales = sales.update_cell(2, row_update, 0)
+    ne_capcity = capacity.update_cell(2, row_update, ne_capacity_input)
+    ne_availability = availability.update_cell(2, row_update, ne_capacity_input)
+          
     
 def command_required():
     """
