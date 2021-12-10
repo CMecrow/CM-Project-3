@@ -79,9 +79,18 @@ def create_event():
     capacity.update_cell(1, row_update, new_event_name)
     availability.update_cell(1, row_update, new_event_name)
     ne_capacity_input = int(input(f"\nSet capacity for {new_event_name}: "))
-    ne_sales = sales.update_cell(2, row_update, 0)
-    ne_capcity = capacity.update_cell(2, row_update, ne_capacity_input)
-    ne_availability = availability.update_cell(2, row_update, ne_capacity_input)
+    sales.update_cell(2, row_update, 0)
+    capacity.update_cell(2, row_update, ne_capacity_input)
+    availability.update_cell(2, row_update, ne_capacity_input)
+    ne_details = {
+        'Event': new_event_name,
+        'Capacity': ne_capacity_input,
+        'Sales': 0,
+        'Availability': ne_capacity_input
+    }
+    print("\nEvent created:\n")
+    for key, value in ne_details.items():
+        print(key, ':', value)
           
     
 def command_required():
