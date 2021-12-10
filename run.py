@@ -17,7 +17,10 @@ SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 def sell_event():
     """
     User is displayed a list of on sale events, selects an event
-    then inputs how many tickets they'd like to sell
+    then inputs how many tickets they'd like to sell.
+    Validation on event selection occurs by pulling data as a list
+    Validation on availability occurs and either provides an error
+    or provides confirmation of booking and displays remaining ticket count.
     """  
     while True:
         events = SHEET.worksheet('sales').row_values(1)
@@ -57,7 +60,26 @@ def sell_event():
                     f"Please enter a valid event name from the list above, you entered {event_input}"
                 )
         except ValueError as e:
-            print(f"\nInvalid selection: {e}\n")            
+            print(f"\nInvalid selection: {e}\n")
+
+def create_event():
+    """
+    The user can create an event to go on sale
+    inputting event name and capacity which provides enough
+    detail for availability to be updated.
+    """ 
+    sales = SHEET.worksheet('sales')
+    availability = SHEET.worksheet('availability')
+    capacity = SHEET.worksheet('capacity')
+    row_len = len(sales.row_values(1))
+    row_update = row_len + 1
+    print("\nCreate Event:\n")
+    new_event_name = input("Enter a name for your event: ")
+    sales.update_cell(1, row_update, new_event_name)
+    capacity.update_cell(1, row_update, new_event_name)
+    availability.update_cell(1, row_update, new_event_name)
+    new_event_capacity = int(input(f"\nSet capacity for {new_event_name}: "))
+
       
     
 def command_required():
@@ -74,7 +96,7 @@ def command_required():
             sell_event()
             break
         elif command_input == '2':
-            print("Create")
+            create_event()
             break
         elif command_input == '3':
             print("Report")
