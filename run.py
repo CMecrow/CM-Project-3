@@ -91,6 +91,27 @@ def create_event():
     print("\nEvent created:\n")
     for key, value in ne_details.items():
         print(key, ':', value)
+
+def sales_report():
+    keys = ['Capacity', 'Sales', 'Availability']
+    events = SHEET.worksheet('sales').row_values(1)
+    capacity_fig = SHEET.worksheet('capacity').row_values(2)
+    sales_fig = SHEET.worksheet('sales').row_values(2)
+    availability_fig = SHEET.worksheet('availability').row_values(2)
+    sales = SHEET.worksheet('sales')
+    report = {}
+
+    for i,event in enumerate(events):
+        report[event] = {
+            'Capacity': capacity_fig[i],
+            'Sales': sales_fig[i],
+            'Availability': availability_fig[i]
+        }
+    
+    for event_name, event in report.items():
+        print(event_name + ':')
+        for key, value in event.items():
+            print('\t', key + ':', value)
           
     
 def command_required():
@@ -110,7 +131,7 @@ def command_required():
             create_event()
             break
         elif command_input == '3':
-            print("Report")
+            sales_report()
             break
         else:
             validate_task(command_input)            
