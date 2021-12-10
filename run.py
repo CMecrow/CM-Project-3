@@ -116,7 +116,7 @@ def sales_report():
     for event_name, event in report.items():
         print(event_name + ':')
         for key, value in event.items():
-            print('\t', key + ':', value)
+            print('\t', key + ':', value)  # \t inserts a tab
         print("")  
     
 
