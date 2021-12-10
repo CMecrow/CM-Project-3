@@ -14,6 +14,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 
+
 def sell_event():
     """
     User is displayed a list of on sale events, selects an event
@@ -94,19 +95,18 @@ def create_event():
     for key, value in ne_details.items():
         print(key + ':', value)
 
+
 def sales_report():
     """
     """
     print("\nGenerating Sales Report...\n")
-    keys = ['Capacity', 'Sales', 'Availability']
     events = SHEET.worksheet('sales').row_values(1)
     capacity_fig = SHEET.worksheet('capacity').row_values(2)
     sales_fig = SHEET.worksheet('sales').row_values(2)
     availability_fig = SHEET.worksheet('availability').row_values(2)
-    sales = SHEET.worksheet('sales')
     report = {}
 
-    for i,event in enumerate(events):
+    for i, event in enumerate(events):
         report[event] = {
             'Capacity': capacity_fig[i],
             'Sales': sales_fig[i],
@@ -119,6 +119,7 @@ def sales_report():
             print('\t', key + ':', value)
         print("")  
     
+
 def command_required():
     """
     Get a task number input from the user.
@@ -132,7 +133,7 @@ def command_required():
         if command_input == '1':
             sell_event()
         elif command_input == '2':
-            create_event()     
+            create_event()    
         elif command_input == '3':
             sales_report() 
         elif command_input == '4':
@@ -156,18 +157,20 @@ def invalid_task(value):
 
     return True
 
+
 def validate_tickets(values):
     """
     """
     try:
         if int(values) >= 9:
             raise ValueError(
-                f"This event has a ticket limit of 8"
+                "This event has a ticket limit of 8"
             )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again")   
         return False
 
-    return True    
+    return True  
+
 
 command_required()
