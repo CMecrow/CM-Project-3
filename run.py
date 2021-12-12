@@ -19,7 +19,7 @@ def sell_event():
     """
     User is displayed a list of on sale events, selects an event
     then inputs how many tickets they'd like to sell.
-    Validation on event selection occurs by pulling data as a list
+    Validation on event selection occurs by pulling row data as a list
     Validation on availability occurs and either provides an error
     or provides confirmation of booking and displays remaining ticket count.
     """
@@ -68,8 +68,10 @@ def sell_event():
 def create_event():
     """
     The user can create an event to go on sale
-    inputting event name and capacity which provides enough
-    detail for availability to be updated.
+    inputting event name and capacity with 
+    availability being handled automatically.
+    Also includes a confirmation print of the created event
+    in a dictionary
     """
     sales = SHEET.worksheet('sales')
     availability = SHEET.worksheet('availability')
@@ -98,6 +100,9 @@ def create_event():
 
 def sales_report():
     """
+    Creates a dictionary for each event then a nested dictionary
+    within which displays Capacity, Sales and Availability
+    Also includes print statements to improve readability of data
     """
     print("\nGenerating Sales Report...\n")
     events = SHEET.worksheet('sales').row_values(1)
@@ -124,6 +129,7 @@ def command_required():
     """
     Get a task number input from the user.
     Runs a while loop to ensure input entered is valid ie a number between 1-3
+    and also to continue programe runs even if input is incorrect
     """
     while True:
         print("Welcome to Tone Deaf Newcastle\n")
@@ -145,7 +151,7 @@ def command_required():
 
 def invalid_task(value):
     """
-    Reports an invalid input from the user
+    Reports an invalid input from the user, guides them to a correct entry
     """
     try:
         raise ValueError(
@@ -160,6 +166,7 @@ def invalid_task(value):
 
 def validate_tickets(values):
     """
+    Enforces a ticket limit of 8 per purchase (industry standard)
     """
     try:
         if int(values) >= 9:
