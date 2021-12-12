@@ -22,7 +22,7 @@ def sell_event():
     Validation on event selection occurs by pulling data as a list
     Validation on availability occurs and either provides an error
     or provides confirmation of booking and displays remaining ticket count.
-    """  
+    """
     while True:
         events = SHEET.worksheet('sales').row_values(1)
         sales = SHEET.worksheet('sales')
@@ -54,7 +54,7 @@ def sell_event():
                             )
                 except ValueError as e:
                     print(f"\nInvalid input: {e}\n")
-                    break 
+                    break
 
             if event_input not in events:
                 raise ValueError(
@@ -70,7 +70,7 @@ def create_event():
     The user can create an event to go on sale
     inputting event name and capacity which provides enough
     detail for availability to be updated.
-    """ 
+    """
     sales = SHEET.worksheet('sales')
     availability = SHEET.worksheet('availability')
     capacity = SHEET.worksheet('capacity')
@@ -112,13 +112,13 @@ def sales_report():
             'Sales': sales_fig[i],
             'Availability': availability_fig[i]
         }
-    
+
     for event_name, event in report.items():
         print(event_name + ':')
         for key, value in event.items():
             print('\t', key + ':', value)  # \t inserts a tab
-        print("")  
-    
+        print("")
+
 
 def command_required():
     """
@@ -133,15 +133,15 @@ def command_required():
         if command_input == '1':
             sell_event()
         elif command_input == '2':
-            create_event()    
+            create_event()
         elif command_input == '3':
-            sales_report() 
+            sales_report()
         elif command_input == '4':
             print("\nGoodbye from Tone Deaf Newcastle!")
-            break   
+            break
         else:
-            invalid_task(command_input)           
-    
+            invalid_task(command_input)
+
 
 def invalid_task(value):
     """
@@ -167,10 +167,10 @@ def validate_tickets(values):
                 "This event has a ticket limit of 8"
             )
     except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again")   
+        print(f"\nInvalid entry: {e}, please try again")
         return False
 
-    return True  
+    return True
 
 
 command_required()
