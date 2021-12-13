@@ -22,7 +22,7 @@ With these four pillars, the user could run a functioning box office, and the pr
 
 Because the program automates the selling of a ticket and the updating of records, it eliminates any room for human error that may occur. The last thing a music venue wants is to have a larger audience than they can host, running overcapacity. Because the availability for an event is based on the total entered capacity on event creation, minus any processed sales, the figure will always be correct, with validation included to stop the availability of an event from dropping below zero.
 
-Though the venue may have a total set capacity, this may change from event to event, due to factors such as merchandise being sold in the venue, extra bar sale points or even just for public safety. The created event may even be happening outside the venue at a seperate location. The program was made to be able to set any capacity with this in mind.
+Though the venue may have a total set capacity, this may change from event to event, due to factors such as merchandise being sold in the venue, extra bar sale points or even just for public safety. The created event may even be happening outside the venue at a separate location. The program was made to be able to set any capacity with this in mind.
 
 The creation of a new event is quick and easy, only requiring a title and capacity to be created. This is useful for those new events just announced or even for a last minute request for a VIP section!
 

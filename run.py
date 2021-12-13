@@ -29,7 +29,8 @@ def sell_event():
         availability = SHEET.worksheet('availability')
         capacity = SHEET.worksheet('capacity')
         print(f"\nSell Existing Event:\n\n{events}\n")
-        event_input = input("Enter event name from list above or enter n to exit: ")
+        event_input = input(
+            "Enter event name from list above or enter n to exit: ")
 
         try:
             if event_input in events:
@@ -38,14 +39,19 @@ def sell_event():
                 previous_sales = int(sales.cell(2, event_column).value)
                 capacity_num = int(capacity.cell(2, event_column).value)
                 print(f"\nSelected Event: {event_input}\n")
-                num_tickets = int(input("How many tickets would you like to purchase? "))
+                num_tickets = int(input(
+                    "How many tickets would you like to purchase? "))
                 num_avail = int(availability.cell(2, event_column).value)
                 try:
                     if validate_tickets(num_tickets):
                         if num_avail >= num_tickets:
-                            sales.update_cell(2, event_column, num_tickets + previous_sales)
-                            availability.update_cell(2, event_column, capacity_num - (previous_sales + num_tickets))
-                            amended_avail = int(availability.cell(2, event_column).value)
+                            sales.update_cell(2, event_column, num_tickets +
+                                              previous_sales)
+                            availability.update_cell(
+                                2, event_column, capacity_num - (
+                                    previous_sales + num_tickets))
+                            amended_avail = int(
+                                availability.cell(2, event_column).value)
                             print(f"\n{num_tickets} successfuly sold for {event_input}. {amended_avail} left on sale.\n")
                             break
                         else:
@@ -70,7 +76,7 @@ def sell_event():
 def create_event():
     """
     The user can create an event to go on sale
-    inputting event name and capacity with 
+    inputting event name and capacity with
     availability being handled automatically.
     Also includes a confirmation print of the created event
     in a dictionary
@@ -82,14 +88,16 @@ def create_event():
         row_len = len(sales.row_values(1))
         row_update = row_len + 1
         print("\nCreate Event:\n")
-        new_event_name = input("Enter a name for your event, or enter n to exit: ")
+        new_event_name = input(
+            "Enter a name for your event, or enter n to exit: ")
         if new_event_name == 'n':
             break
         else:
             sales.update_cell(1, row_update, new_event_name)
             capacity.update_cell(1, row_update, new_event_name)
             availability.update_cell(1, row_update, new_event_name)
-            ne_capacity_input = int(input(f"\nSet capacity for {new_event_name}: "))
+            ne_capacity_input = int(
+                input(f"\nSet capacity for {new_event_name}: "))
             sales.update_cell(2, row_update, 0)
             capacity.update_cell(2, row_update, ne_capacity_input)
             availability.update_cell(2, row_update, ne_capacity_input)
@@ -103,39 +111,41 @@ def create_event():
             for key, value in ne_details.items():
                 print(key + ':', value)
 
+            break
 
-    def sales_report():
-        """
-        Creates a dictionary for each event then a nested dictionary
-        within which displays Capacity, Sales and Availability
-        Also includes print statements to improve readability of data
-        """
-        print("\nGenerating Sales Report...\n")
-        events = SHEET.worksheet('sales').row_values(1)
-        capacity_fig = SHEET.worksheet('capacity').row_values(2)
-        sales_fig = SHEET.worksheet('sales').row_values(2)
-        availability_fig = SHEET.worksheet('availability').row_values(2)
-        report = {}
 
-        for i, event in enumerate(events):
-            report[event] = {
-                'Capacity': capacity_fig[i],
-                'Sales': sales_fig[i],
-                'Availability': availability_fig[i]
-            }
+def sales_report():
+    """
+    Creates a dictionary for each event then a nested dictionary
+    within which displays Capacity, Sales and Availability
+    Also includes print statements to improve readability of data
+    """
+    print("\nGenerating Sales Report...\n")
+    events = SHEET.worksheet('sales').row_values(1)
+    capacity_fig = SHEET.worksheet('capacity').row_values(2)
+    sales_fig = SHEET.worksheet('sales').row_values(2)
+    availability_fig = SHEET.worksheet('availability').row_values(2)
+    report = {}
 
-        for event_name, event in report.items():
-            print(event_name + ':')
-            for key, value in event.items():
-                print('\t', key + ':', value)  # \t inserts a tab
-            print("")
+    for i, event in enumerate(events):
+        report[event] = {
+            'Capacity': capacity_fig[i],
+            'Sales': sales_fig[i],
+            'Availability': availability_fig[i]
+        }
+
+    for event_name, event in report.items():
+        print(event_name + ':')
+        for key, value in event.items():
+            print('\t', key + ':', value)  # \t inserts a tab
+        print("")
 
 
 def command_required():
     """
     Get a task number input from the user.
     Runs a while loop to ensure input entered is valid ie a number between 1-3
-    and also to continue programe runs even if input is incorrect
+    and also to continue program runs even if input is incorrect
     """
     while True:
         print("Welcome to Tone Deaf Newcastle\n")
@@ -187,3 +197,4 @@ def validate_tickets(values):
 
 
 command_required()
+
