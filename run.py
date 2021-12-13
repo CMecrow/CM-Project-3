@@ -55,7 +55,7 @@ def sell_event():
                 except ValueError as e:
                     print(f"\nInvalid input: {e}\n")
                     break
-            
+
             if event_input == 'n':
                 break
             elif event_input not in events:
