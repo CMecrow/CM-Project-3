@@ -29,7 +29,7 @@ def sell_event():
         availability = SHEET.worksheet('availability')
         capacity = SHEET.worksheet('capacity')
         print(f"\nSell Existing Event:\n\n{events}\n")
-        event_input = input("Enter event name from list above: ")
+        event_input = input("Enter event name from list above or enter n to exit: ")
 
         try:
             if event_input in events:
@@ -55,8 +55,10 @@ def sell_event():
                 except ValueError as e:
                     print(f"\nInvalid input: {e}\n")
                     break
-
-            if event_input not in events:
+            
+            if event_input == 'n':
+                break
+            elif event_input not in events:
                 raise ValueError(
                     f"Please enter a valid event name from the list above, you entered {event_input}"
                 )
@@ -73,56 +75,60 @@ def create_event():
     Also includes a confirmation print of the created event
     in a dictionary
     """
-    sales = SHEET.worksheet('sales')
-    availability = SHEET.worksheet('availability')
-    capacity = SHEET.worksheet('capacity')
-    row_len = len(sales.row_values(1))
-    row_update = row_len + 1
-    print("\nCreate Event:\n")
-    new_event_name = input("Enter a name for your event: ")
-    sales.update_cell(1, row_update, new_event_name)
-    capacity.update_cell(1, row_update, new_event_name)
-    availability.update_cell(1, row_update, new_event_name)
-    ne_capacity_input = int(input(f"\nSet capacity for {new_event_name}: "))
-    sales.update_cell(2, row_update, 0)
-    capacity.update_cell(2, row_update, ne_capacity_input)
-    availability.update_cell(2, row_update, ne_capacity_input)
-    ne_details = {
-        'Event': new_event_name,
-        'Capacity': ne_capacity_input,
-        'Sales': 0,
-        'Availability': ne_capacity_input
-    }
-    print("\nEvent created:\n")
-    for key, value in ne_details.items():
-        print(key + ':', value)
+    while True:
+        sales = SHEET.worksheet('sales')
+        availability = SHEET.worksheet('availability')
+        capacity = SHEET.worksheet('capacity')
+        row_len = len(sales.row_values(1))
+        row_update = row_len + 1
+        print("\nCreate Event:\n")
+        new_event_name = input("Enter a name for your event, or enter n to exit: ")
+        if new_event_name == 'n':
+            break
+        else:
+            sales.update_cell(1, row_update, new_event_name)
+            capacity.update_cell(1, row_update, new_event_name)
+            availability.update_cell(1, row_update, new_event_name)
+            ne_capacity_input = int(input(f"\nSet capacity for {new_event_name}: "))
+            sales.update_cell(2, row_update, 0)
+            capacity.update_cell(2, row_update, ne_capacity_input)
+            availability.update_cell(2, row_update, ne_capacity_input)
+            ne_details = {
+                'Event': new_event_name,
+                'Capacity': ne_capacity_input,
+                'Sales': 0,
+                'Availability': ne_capacity_input
+            }
+            print("\nEvent created:\n")
+            for key, value in ne_details.items():
+                print(key + ':', value)
 
 
-def sales_report():
-    """
-    Creates a dictionary for each event then a nested dictionary
-    within which displays Capacity, Sales and Availability
-    Also includes print statements to improve readability of data
-    """
-    print("\nGenerating Sales Report...\n")
-    events = SHEET.worksheet('sales').row_values(1)
-    capacity_fig = SHEET.worksheet('capacity').row_values(2)
-    sales_fig = SHEET.worksheet('sales').row_values(2)
-    availability_fig = SHEET.worksheet('availability').row_values(2)
-    report = {}
+    def sales_report():
+        """
+        Creates a dictionary for each event then a nested dictionary
+        within which displays Capacity, Sales and Availability
+        Also includes print statements to improve readability of data
+        """
+        print("\nGenerating Sales Report...\n")
+        events = SHEET.worksheet('sales').row_values(1)
+        capacity_fig = SHEET.worksheet('capacity').row_values(2)
+        sales_fig = SHEET.worksheet('sales').row_values(2)
+        availability_fig = SHEET.worksheet('availability').row_values(2)
+        report = {}
 
-    for i, event in enumerate(events):
-        report[event] = {
-            'Capacity': capacity_fig[i],
-            'Sales': sales_fig[i],
-            'Availability': availability_fig[i]
-        }
+        for i, event in enumerate(events):
+            report[event] = {
+                'Capacity': capacity_fig[i],
+                'Sales': sales_fig[i],
+                'Availability': availability_fig[i]
+            }
 
-    for event_name, event in report.items():
-        print(event_name + ':')
-        for key, value in event.items():
-            print('\t', key + ':', value)  # \t inserts a tab
-        print("")
+        for event_name, event in report.items():
+            print(event_name + ':')
+            for key, value in event.items():
+                print('\t', key + ':', value)  # \t inserts a tab
+            print("")
 
 
 def command_required():
