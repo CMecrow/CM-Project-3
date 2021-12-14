@@ -17,11 +17,13 @@ SHEET = GSPREAD_CLIENT.open('tone_deaf_newcastle')
 
 def sell_event():
     """
-    User is displayed a list of on sale events, selects an event
-    then inputs how many tickets they'd like to sell.
-    Validation on event selection occurs by pulling row data as a list
-    Validation on availability occurs and either provides an error
-    or provides confirmation of booking and displays remaining ticket count.
+    User is displayed a list of on sale events,
+    selects an event then inputs how many tickets
+    they'd like to sell. Validation on event selection
+    occurs by pulling row data as a list.
+    Validation on availability occurs and either
+    provides an error or provides confirmation of booking
+    and displays remaining ticket count.
     """
     while True:
         events = SHEET.worksheet('sales').row_values(1)
@@ -52,11 +54,14 @@ def sell_event():
                                     previous_sales + num_tickets))
                             amended_avail = int(
                                 availability.cell(2, event_column).value)
-                            print(f"\n{num_tickets} successfuly sold for {event_input}. {amended_avail} left on sale.\n")
+                            print(f"\n{num_tickets} successfuly sold for "
+                                  f"{event_input}. {amended_avail} "
+                                  "left on sale.\n")
                             break
                         else:
                             raise ValueError(
-                                f"Not enough tickets available. Only {num_avail} remaining"
+                                "Not enough tickets available. Only "
+                                f"{num_avail} remaining."
                             )
                 except ValueError as e:
                     print(f"\nInvalid input: {e}\n")
@@ -66,7 +71,8 @@ def sell_event():
                 break
             elif event_input not in events:
                 raise ValueError(
-                    f"Please enter a valid event name from the list above, you entered {event_input}"
+                    "Please enter a valid event name from the list above, "
+                    f"you entered {event_input}."
                 )
         except ValueError as e:
             print(f"\nInvalid selection: {e}")
@@ -116,9 +122,11 @@ def create_event():
 
 def sales_report():
     """
-    Creates a dictionary for each event then a nested dictionary
-    within which displays Capacity, Sales and Availability
-    Also includes print statements to improve readability of data
+    Creates a dictionary for each event then a
+    nested dictionary within which displays
+    Capacity, Sales and Availability.
+    Also includes print statements to improve
+    readability of data.
     """
     print("\nGenerating Sales Report...\n")
     events = SHEET.worksheet('sales').row_values(1)
@@ -144,13 +152,16 @@ def sales_report():
 def command_required():
     """
     Get a task number input from the user.
-    Runs a while loop to ensure input entered is valid ie a number between 1-3
-    and also to continue program runs even if input is incorrect
+    Runs a while loop to ensure input entered is
+    valid ie a number between 1-3 and also to
+    ensure the program runs even if input is incorrect
     """
     while True:
         print("Welcome to Tone Deaf Newcastle\n")
-        print("[1] Sell Existing Event\n[2] Create Event\n[3] Generate Sales Report\n[4] Exit Program\n")
-        command_input = input("Enter your task number from the list above: ")
+        print("[1] Sell Existing Event\n[2] Create Event")
+        print("[3] Generate Sales Report\n[4] Exit Program\n")
+        command_input = input(
+            "Enter your task number from the list above: ")
 
         if command_input == '1':
             sell_event()
@@ -167,7 +178,8 @@ def command_required():
 
 def invalid_task(value):
     """
-    Reports an invalid input from the user, guides them to a correct entry
+    Reports an invalid input from the user,
+    guides them to a correct entry
     """
     try:
         raise ValueError(
