@@ -145,7 +145,7 @@ def sales_report():
     for event_name, event in report.items():
         print(event_name + ':')
         for key, value in event.items():
-            print('\t', key + ':', value)  # \t inserts a tab
+            print('\t', key + ':', value)
         print("")
 
 
@@ -194,7 +194,7 @@ def invalid_task(value):
 
 def validate_tickets(values):
     """
-    Enforces a ticket limit of 8 per purchase (industry standard)
+    Enforces a ticket limit of 8 per purchase which is industry standard.
     """
     try:
         if int(values) >= 9:
@@ -209,4 +209,3 @@ def validate_tickets(values):
 
 
 command_required()
-
