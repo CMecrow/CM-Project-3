@@ -54,10 +54,16 @@ To ease in the running of the events and also in the marketing and sales of the 
 - (sales_report function). This feature of the program is all about taking the data present in the data model and then printing it back to the user in as readable a format as possible. This was acheived though use of nested dictionaries. The outer dictionaries were created first containing event names with nested dictionaries created to store capacity, sales and availability specific to each event.
 
 ### Future Features
+- The created program handles sales and events on an attendance level. However it does not cover the financial side of a box office, so this would currently have to be done seperately. This could however be included in a future release of the program, expanding the data model and the functions of the existing project. The inclusion of finances would branch out into many different areas.
+    - An extra layer would have to be added to the data model to store ticket prices and then total sales which could be acheived by multiplying sales data with ticket price.
+    - This data would then need to be accessed via each of the key present features, sell event, create event and sales report. 
+    - To make sure the daily takings were correct, the program could create a daily 'session' when first run, which could then be input to the data model and printed back the user as a seperate form.
 
 --- 
 
 ## Data Model
+
+
 
 ## Testing
 
