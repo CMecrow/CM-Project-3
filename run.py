@@ -41,8 +41,12 @@ def sell_event():
                 previous_sales = int(sales.cell(2, event_column).value)
                 capacity_num = int(capacity.cell(2, event_column).value)
                 print(f"\nSelected Event: {event_input}\n")
-                num_tickets = int(input(
-                    "How many tickets would you like to purchase? "))
+                try:
+                    num_tickets = int(input(
+                        "How many tickets would you like to purchase? "))
+                except ValueError:
+                    print("\nPlease enter a valid number using only digits.")
+                    continue
                 num_avail = int(availability.cell(2, event_column).value)
                 try:
                     if validate_tickets(num_tickets):
@@ -76,7 +80,7 @@ def sell_event():
                 )
         except ValueError as e:
             print(f"\nInvalid selection: {e}")
-            break
+            continue
 
 
 def create_event():
