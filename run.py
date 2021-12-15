@@ -102,22 +102,27 @@ def create_event():
             sales.update_cell(1, row_update, new_event_name)
             capacity.update_cell(1, row_update, new_event_name)
             availability.update_cell(1, row_update, new_event_name)
-            ne_capacity_input = int(
-                input(f"\nSet capacity for {new_event_name}: "))
-            sales.update_cell(2, row_update, 0)
-            capacity.update_cell(2, row_update, ne_capacity_input)
-            availability.update_cell(2, row_update, ne_capacity_input)
-            ne_details = {
-                'Event': new_event_name,
-                'Capacity': ne_capacity_input,
-                'Sales': 0,
-                'Availability': ne_capacity_input
-            }
-            print("\nEvent created:\n")
-            for key, value in ne_details.items():
-                print(key + ':', value)
+            while True:
+                try:
+                    ne_capacity_input = int(
+                        input(f"\nSet capacity for {new_event_name}: "))
+                except ValueError:
+                    print("\nPlease enter a valid number using only digits.")
+                    continue
+                sales.update_cell(2, row_update, 0)
+                capacity.update_cell(2, row_update, ne_capacity_input)
+                availability.update_cell(2, row_update, ne_capacity_input)
+                ne_details = {
+                    'Event': new_event_name,
+                    'Capacity': ne_capacity_input,
+                    'Sales': 0,
+                    'Availability': ne_capacity_input
+                }
+                print("\nEvent created:\n")
+                for key, value in ne_details.items():
+                    print(key + ':', value)
 
-            break
+                return
 
 
 def sales_report():

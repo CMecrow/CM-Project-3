@@ -13,7 +13,7 @@ This project is written in Python with data stored on a Google worksheet.
 ## Project Goals
 
 The main goals of this project are:
-- To read and input to a data model (Google worksheet), which stores the essential information about each event, ie event name, capacity, sales and availability across three worksheets.
+- To read and input to a data model, (created via pages in a Google Worksheet), which stores the essential information about each event, ie event name, capacity, sales and availability across three worksheets.
 - Provide the user the ability to sell tickets for an event, should they be available, with those sales being updated on the Google worksheet.
 - Provide the user the tools to create a brand new event and set a total capacity, which can then be sold and updated with the rest of the program.
 - Provide the user the tools to create an up to date 'sales report', providing total capacity, sales and availability for each event.
@@ -63,7 +63,7 @@ To ease in the running of the events and also in the marketing and sales of the 
 
 ## Data Model
 
-![https://i.imgur.com/iRH5HIQ](https://i.imgur.com/iRH5HIQ.jpg "Data Model")
+![https://i.imgur.com/ifA5L0f](https://i.imgur.com/ifA5L0f.jpg "Data Model")
 
 My chosen data model is created through three pages of a Google worksheet. As displayed in the image above, the tying link between the three pages is the event name. It is through the event name, working as the identifying link, that the changable data, capacity, sales and availability are read and written to. To be able to access this data, I'm using the [gspread](https://docs.gspread.org/en/latest/) Python library.
 
@@ -71,7 +71,11 @@ My chosen data model is created through three pages of a Google worksheet. As di
 
 ## Testing
 
-To avoid the user having to restart the program in the case of an incorrect entry I implemented while loops into the functions that required an input from the user. I also included 'return True' in both input checking functions, validate_tickets and invalid_task.
+Flow chart created to map out project's logic:
+
+![https://i.imgur.com/lCpZ6u4](https://i.imgur.com/lCpZ6u4.jpg) "Logic flow chart"
+
+To avoid the user having to restart the program in the case of an incorrect entry I implemented while loops into the functions that required an input from the user. I also included 'return True' in both separate input checking functions, validate_tickets and invalid_task.
 
 ## Deployment procedure
 
