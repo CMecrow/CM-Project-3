@@ -139,16 +139,17 @@ def sales_report():
     """
     print("\nGenerating Sales Report...\n")
     events = SHEET.worksheet('sales').row_values(1)
-    capacity_fig = SHEET.worksheet('capacity').row_values(2)
-    sales_fig = SHEET.worksheet('sales').row_values(2)
-    availability_fig = SHEET.worksheet('availability').row_values(2)
+    capacity_data = SHEET.worksheet('capacity').row_values(2)
+    sales_data = SHEET.worksheet('sales').row_values(2)
+    availability_data = SHEET.worksheet('availability').row_values(2)
     report = {}
 
-    for i, event in enumerate(events):
+    for event, capacity, sales, availability in \
+            zip(events, capacity_data, sales_data, availability_data):
         report[event] = {
-            'Capacity': capacity_fig[i],
-            'Sales': sales_fig[i],
-            'Availability': availability_fig[i]
+            'Capacity': capacity,
+            'Sales': sales,
+            'Availability': availability
         }
 
     for event_name, event in report.items():
