@@ -63,7 +63,11 @@ To ease in the running of the events and also in the marketing and sales of the 
 
 ## Data Model
 
+![https://i.imgur.com/iRH5HIQ](https://i.imgur.com/iRH5HIQ.jpg "Data Model")
 
+My chosen data model is created through three pages of a Google worksheet. As displayed in the image above, the tying link between the three pages is the event name. It is through the event name, working as the identifying link, that the changable data, capacity, sales and availability are read and written to. To be able to access this data, I'm using the [gspread](https://docs.gspread.org/en/latest/) Python library.
+
+---
 
 ## Testing
 
