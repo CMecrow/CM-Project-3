@@ -75,7 +75,11 @@ Flow chart created to map out project's logic:
 
 ![https://i.imgur.com/lCpZ6u4](https://i.imgur.com/lCpZ6u4.jpg) "Logic flow chart"
 
-To avoid the user having to restart the program in the case of an incorrect entry I implemented while loops into the functions that required an input from the user. I also included 'return True' in both separate input checking functions, validate_tickets and invalid_task.
+To avoid the user having to restart the program in the case of an incorrect entry I implemented while loops into the functions that required an input from the user. I also included 'return True' in both separate input checking functions, validate_tickets and invalid_task. This increases the program's usability and user experience. In a similar vein, I included ValueErrors to help guide the user with a printed description of what the issue was and how to correct the error. I had to expand on errors created for the inputs that were required to be integers. The original errors only functioned if the input was an integer, rather than a string or a float so I added more generic ValueErrors where appropriate. This issue was discovered through manual testing to ensure the program did not throw back an unreadable error for the user, or close the program where it wouldn't be expected to.
+
+Adding these loops to accomodate the errors cause some areas of the code to become quite long and heavily indented, causing issued with overall line length. This wasn't an issue I'd dealt with before but I found some useful documentation [here](https://www.python.org/dev/peps/pep-0008/#indentation) which explained the process.
+
+This manual testing also highlighted the need for an 'escape' from a selected task, so I added a simple 'enter n to exit' line in the first input sections of sell_ticket and create_event, along with an if statement to match, should the user have selected the wrong task by accident.
 
 ## Deployment procedure
 
