@@ -98,8 +98,16 @@ def create_event():
         print("\nCreate Event:\n")
         new_event_name = input(
             "Enter a name for your event, or enter n to exit: ")
-        if new_event_name == 'n':
-            break
+        try:
+            if new_event_name == 'n':
+                break
+            if new_event_name == '':
+                raise ValueError(
+                    "Your event name must contain at least 1 character"
+                )
+        except ValueError as e:
+                print(f"\nInvalid selection: {e}")
+                continue
         else:
             sales.update_cell(1, row_update, new_event_name)
             capacity.update_cell(1, row_update, new_event_name)

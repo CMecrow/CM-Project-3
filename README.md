@@ -88,6 +88,16 @@ create a dictionary with a key for each event, then create a nested dictionary w
 
 Throughout the project, all python code has been checked by linter Pylint within Gitpod and also run through PEP8's online checker to ensure there are no errors or warnings to be amended.
 
+---
+
 ## Deployment procedure
 
+
+
+---
+
 ## Credits
+
+Initial project creation, deployment, importing of libraries and code structure was built from the [Code Institute Love Sandwiches walkthrough project.](https://github.com/CMecrow/love-sandwiches)
+Information on how to split longer lines of code was taken from [here.](https://www.python.org/dev/peps/pep-0008/#indentation)
+Printing dictionaries in a readable form was found [here.](https://thispointer.com/python-4-ways-to-print-items-of-a-dictionary-line-by-line/)
