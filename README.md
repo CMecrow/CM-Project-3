@@ -103,6 +103,7 @@ Before deploying I had to make a small tweak to include a new line character int
 Throughout the project, all python code has been checked by linter Pylint within Gitpod and also run through PEP8's online checker to ensure there are no errors or warnings to be amended.
 
 [PEP8](http://pep8online.com/)
+
 [Pylint](https://pylint.org/)
 
 ---
@@ -121,5 +122,7 @@ Throughout the project, all python code has been checked by linter Pylint within
 ## Credits
 
 Initial project creation, deployment, importing of libraries and code structure was built from the [Code Institute Love Sandwiches walkthrough project.](https://github.com/CMecrow/love-sandwiches)
+
 Information on how to split long lines of code was taken from [here.](https://www.python.org/dev/peps/pep-0008/#indentation)
+
 Printing dictionaries in a readable form was found [here.](https://thispointer.com/python-4-ways-to-print-items-of-a-dictionary-line-by-line/)
