@@ -73,7 +73,7 @@ def sell_event():
                 break
             elif event_input not in events:
                 raise ValueError(
-                    "Please enter a valid event name from the list above, "
+                    "Please enter a valid event name from the list above,\n"
                     f"you entered {event_input}."
                 )
         except ValueError as e:
@@ -199,7 +199,7 @@ def invalid_task(value):
     """
     try:
         raise ValueError(
-            f"Please enter a task number between 1-4. You entered {value}"
+            f"Please enter a task number between 1-4.\nYou entered {value}"
         )
     except ValueError as e:
         print(f"\nInvalid selection: {e}\n")
