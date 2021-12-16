@@ -4,9 +4,7 @@ As a developer, I've been tasked with creating a program to aid in the running o
 
 This project is written in Python with data stored on a Google worksheet.
 
-[Here is the live version of this project]()
-
-# Screenshots
+[Here is the live version of this project](https://tone-deaf-newcastle.herokuapp.com/)
 
 ---
 
@@ -37,10 +35,16 @@ To ease in the running of the events and also in the marketing and sales of the 
 ### Existing Features
 
 #### Welcome screen
+
+![https://i.imgur.com/7Ovb9Hk](https://i.imgur.com/7Ovb9Hk.jpg "Welcome screen")
+
 - (command_required function). The Welcome page identifies the venue name 'Tone Deaf Newcastle' and offers a welcome to the user. The user is then presented with a list of tasks that the program can perform, and they're then prompted to enter a specific task number from the aforementioned list. I decided to use task numbers rather than task names to reduce the required input from the user, making the whole program more user-friendly and quicker overall to use. Visually all print lines are spaced apart or on separate lines for increased readability.
 - (invalid_task function). As with any user input, there are likely to be mistakes / incorrect entries. Should an invalid task number be entered, an error is raised and printed to the user, asking them to enter a number between 1 and 4, displaying the value that they entered. This has been included to provide a better user experience and also to provide guiding feedback to the user.
 
 #### Sell Event
+
+![https://i.imgur.com/JkpHamH](https://i.imgur.com/JkpHamH.jpg "Sell Event")
+
 - (sell_event function). The ability to sell tickets for an event is obviously crucial to a project like this. The user is first given confirmation of what task they're performing, in this case, 'Sell Existing Event'. They are also shown a list of all existing events stored on the sales page of the worksheet, this performs a similar role to the welcome screen, displaying all available options to the user. As the event data is pulled from the worksheet directly, it is always updated should an extra event be created, as detailed later in the features section.
 - The user is then required to input the name of the event they're wanting to sell for and also told if they want to exit the sell task, enter n which will take them back to the welcome screen. The input is then validated by checking the created list of events that was printed earlier, against the user input. If there isn't a match, an error is raised and printed to the user, again pointing them in the right direction.
 - Once an existing event has been selected, the user is then prompted to input how many tickets they'd like to purchase.
@@ -48,9 +52,15 @@ To ease in the running of the events and also in the marketing and sales of the 
 - Once this validation is complete, the entered ticket number is then checked against the number of tickets left available, data that is stored in the 'availability' page of the worksheet. If availability would drop below zero an error is raised and printed to the user explaining that there aren't enough tickets available to complete the order, and also showing them how many tickets are left. If the availability is greater to or equal to the entered number, the new sales data is entered into the 'sales' page of the worksheet, and the 'availability' page is also updated to reflect the sale. The user is given confirmation of the order's success, with a summary of the order printed back to them, along with how many tickets are left available, information that could prove useful at a glance should there be a rush for that event.
 
 #### Create Event
+
+![https://i.imgur.com/Sg76Iwa](https://i.imgur.com/Sg76Iwa.jpg "Create Event")
+
 - (create_event function). Along with hitting another key project goal, creating an event to sell and audit is a necessary task for any box office program. In this program it is achieved by having the user input an event name, updating that event name into the worksheet's pages, and then taking an event capacity from the user which is then also input into the worksheet 'capacity' and 'availability' pages. The created event is then put into a dictionary which is printed back to the user, offering a confirmation that the event has been created and is ready to be sold.
 
 #### Sales Report
+
+![https://i.imgur.com/64d5NjA](https://i.imgur.com/64d5NjA.jpg "Sales Report")
+
 - (sales_report function). This feature of the program is all about taking the data present in the data model and then printing it back to the user in as readable a format as possible. This was achieved through the use of nested dictionaries. The outer dictionaries were created first containing event names with nested dictionaries created to store capacity, sales, and availability specific to each event.
 
 ### Future Features
@@ -84,6 +94,10 @@ This manual testing also highlighted the need for an 'escape' from a selected ta
 Making sure all printed information was displayed in a readable format was very important, particularly in the sales report. The best manner I found to format the data was to 
 create a dictionary with a key for each event, then create a nested dictionary with the keys of Capacity, Sales, and Availability. I then input the data taken from the for loop of variables as values for the nested dictionary and then printed with indentation and a structure detailed [here.](https://thispointer.com/python-4-ways-to-print-items-of-a-dictionary-line-by-line/)
 
+Slight adjustments had to be made to various print statements to accommodate the mock terminal's 80 character width
+
+Before deploying I had to make a small tweak to include a new line character into each input line after the printed prompt. This was to ensure any characters entered by the user were displayed in the mock terminal.
+
 ### PEP8 Validator and Pylint
 
 Throughout the project, all python code has been checked by linter Pylint within Gitpod and also run through PEP8's online checker to ensure there are no errors or warnings to be amended.
@@ -95,12 +109,17 @@ Throughout the project, all python code has been checked by linter Pylint within
 
 ## Deployment procedure
 
-
+- I made sure the list of requirements stored in requirements.txt were up to date. This was done by running the command 'pip3 freeze > requirements.txt' then pushing the update up to github.
+- I then created a new app on [Heroku](https://heroku.com), named tone-deaf-newcastle. 
+- The next step was to create a config var that included all the information previously stored in the creds.json file, which had not been uploaded to GitHub, along with a second config var with the key of PORT and value of 8000.
+- Buildpacks were then added, firstly Python, then Node.js
+- The GitHub repository was then connected to the Heroku app, with the option for Automatic Deploys enabled.
+- The created Heroku app, tone-deaf-newcastle was then deployed.
 
 ---
 
 ## Credits
 
 Initial project creation, deployment, importing of libraries and code structure was built from the [Code Institute Love Sandwiches walkthrough project.](https://github.com/CMecrow/love-sandwiches)
-Information on how to split longer lines of code was taken from [here.](https://www.python.org/dev/peps/pep-0008/#indentation)
+Information on how to split long lines of code was taken from [here.](https://www.python.org/dev/peps/pep-0008/#indentation)
 Printing dictionaries in a readable form was found [here.](https://thispointer.com/python-4-ways-to-print-items-of-a-dictionary-line-by-line/)
