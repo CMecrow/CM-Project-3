@@ -84,6 +84,10 @@ This manual testing also highlighted the need for an 'escape' from a selected ta
 Making sure all printed information was displayed in a readable format was very important, particularly in the sales report. The best manner I found to format the data was to 
 create a dictionary with a key for each event, then create a nested dictionary with the keys of Capacity, Sales, and Availability. I then input the data taken from the for loop of variables as values for the nested dictionary and then printed with indentation and a structure detailed [here.](https://thispointer.com/python-4-ways-to-print-items-of-a-dictionary-line-by-line/)
 
+### PEP8 Validator and Pylint
+
+Throughout the project, all python code has been checked by linter Pylint within Gitpod and also run through PEP8's online checker to ensure there are no errors or warnings to be amended.
+
 ## Deployment procedure
 
 ## Credits
