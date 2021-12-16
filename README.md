@@ -115,7 +115,7 @@ Throughout the project, all python code has been checked by linter Pylint within
 - The next step was to create a config var that included all the information previously stored in the creds.json file, which had not been uploaded to GitHub, along with a second config var with the key of PORT and value of 8000.
 - Buildpacks were then added, firstly Python, then Node.js
 - The GitHub repository was then connected to the Heroku app, with the option for Automatic Deploys enabled.
-- The created Heroku app, tone-deaf-newcastle was then deployed.
+- The created Heroku app, tone-deaf-newcastle was then deployed [here.](https://tone-deaf-newcastle.herokuapp.com/)
 
 ---
 
