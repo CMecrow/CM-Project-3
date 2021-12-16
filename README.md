@@ -88,6 +88,9 @@ create a dictionary with a key for each event, then create a nested dictionary w
 
 Throughout the project, all python code has been checked by linter Pylint within Gitpod and also run through PEP8's online checker to ensure there are no errors or warnings to be amended.
 
+[PEP8](http://pep8online.com/)
+[Pylint](https://pylint.org/)
+
 ---
 
 ## Deployment procedure

@@ -30,7 +30,7 @@ def sell_event():
         capacity = SHEET.worksheet('capacity')
         print(f"\nSell Existing Event:\n\n{events}\n")
         event_input = input(
-            "Enter event name from list above or enter n to exit: ")
+            "Enter event name from list above or enter n to exit: \n")
 
         try:
             if event_input in events:
@@ -41,7 +41,7 @@ def sell_event():
                 print(f"\nSelected Event: {event_input}\n")
                 try:
                     num_tickets = int(input(
-                        "How many tickets would you like to purchase? "))
+                        "How many tickets would you like to purchase? \n"))
                 except ValueError:
                     print("\nPlease enter a valid number using only digits.")
                     continue
@@ -97,7 +97,7 @@ def create_event():
         row_update = row_len + 1
         print("\nCreate Event:\n")
         new_event_name = input(
-            "Enter a name for your event, or enter n to exit: ")
+            "Enter a name for your event, or enter n to exit: \n")
         try:
             if new_event_name == 'n':
                 break
@@ -115,7 +115,7 @@ def create_event():
             while True:
                 try:
                     ne_capacity_input = int(
-                        input(f"\nSet capacity for {new_event_name}: "))
+                        input(f"\nSet capacity for {new_event_name}: \n"))
                 except ValueError:
                     print("\nPlease enter a valid number using only digits.")
                     continue
@@ -177,7 +177,7 @@ def command_required():
         print("[1] Sell Existing Event\n[2] Create Event")
         print("[3] Generate Sales Report\n[4] Exit Program\n")
         command_input = input(
-            "Enter your task number from the list above: ")
+            "Enter your task number from the list above: \n")
 
         if command_input == '1':
             sell_event()
