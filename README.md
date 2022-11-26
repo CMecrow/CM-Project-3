@@ -4,7 +4,9 @@ As a developer, I've been tasked with creating a program to aid in the running o
 
 This project is written in Python with data stored on a Google worksheet.
 
-[Here is the live version of this project](https://tone-deaf-newcastle.herokuapp.com/)
+~~[Here is the live version of this project](https://tone-deaf-newcastle.herokuapp.com/)~~
+
+The project was redeployed via Render because of the changes to free Heroku hosting. [Link here.](https://cm-project-3.onrender.com/)
 
 ---
 
